@@ -24,14 +24,35 @@
                 <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link">Выход</a></li>
             {% else %}
                 <li class="nav-item"><a href="{% url 'login' %}" class="nav-link">Вход</a></li>
+                <li class="menu-right" ><p id="create-user" class="nav-link">Регистрация</p></li>
             {% endif %}
         </ul>
     </div>
 </nav>
-{% block content %}{% endblock %}
-
+    {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <p {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </p>
+            {% endfor %}
+        </div>
+{% endif %}
+{% block content %}
+{% endblock %}
+<div class="modal fade" tabindex="-1" role="dialog" id="modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content"></div>
+  </div>
+</div>
 <script src="{% static 'js/jquery-3.5.1.js' %}"></script>
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script>
+<script>
+$(document).ready(function() {
+    $("#create-user").modalForm({
+        formURL: "{% url 'create_user' %}"
+    });
+});
+</script>
 {% block scripts %}{% endblock %}
 </body>
 </html>

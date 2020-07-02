@@ -1,0 +1,12 @@
+.help-block {
+    color: red;
+}
+
+#create-user {
+    cursor: pointer;
+}
+
+.messages {
+    text-align: center;
+    color: green;
+}
