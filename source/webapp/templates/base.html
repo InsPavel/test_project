@@ -22,6 +22,7 @@
         <ul class="navbar-nav ml-auto">
             {% if request.user.is_authenticated %}
                 <li class="nav-item"><a href="{% url 'logout' %}" id="logout" class="nav-link">Выход</a></li>
+                <li class="nav-item"><a href="{% url 'detail' user.pk %}" class="nav-link">{{ user.username }}</a></li>
             {% else %}
                 <li class="nav-item"><a href="{% url 'login' %}" id="login" class="nav-link">Вход</a></li>
                 <li class="menu-right" ><p id="create-user" class="nav-link">Регистрация</p></li>

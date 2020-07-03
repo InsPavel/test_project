@@ -1,5 +1,6 @@
+from django.contrib.auth.models import User
 from django.urls import reverse_lazy, reverse
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from .forms import UserCreationForm
 from webapp.models import Article
 from bootstrap_modal_forms.generic import BSModalCreateView
@@ -16,6 +17,12 @@ class RegisterView(BSModalCreateView):
         if form.is_valid():
             return self.form_valid(form)
         return super().post(request, *args, **kwargs)
+
+
+class UserDetailView(DetailView):
+    model = User
+    template_name = 'user_detail.html'
+    context_object_name = 'user_obj'
 
 
 class IndexView(ListView):
