@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block title %}Пользователь{% endblock %}
 {% block menu_links %}
-    <li><a href="#">Редактировать</a></li>
+    <li><p id="user-change" class="nav-link">Сменить пароль</p></li>
 {% endblock %}
 {% block content %}
     <div class="container">
@@ -9,4 +9,13 @@
         <p>Имя пользователя: {{ user_obj.username }}</p>
         <h3>Статьи добваленные пользователем</h3>
     </div>
+{% endblock %}
+{% block scripts %}
+    <script>
+        $(document).ready(function() {
+            $(`#user-change`).modalForm({
+                formURL: "{% url 'password_change' user_obj.pk%}"
+            });
+        });
+    </script>
 {% endblock %}
