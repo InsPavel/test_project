@@ -1,5 +1,6 @@
+from bootstrap_modal_forms.forms import BSModalModelForm
 from django import forms
-from webapp.models import Article
+from webapp.models import Article, Category
 
 
 class ArticleCreateForm(forms.ModelForm):
@@ -16,3 +17,9 @@ class ArticleCreateForm(forms.ModelForm):
     class Meta:
         model = Article
         fields = ['category_id', 'title', 'description', 'image']
+
+
+class CategoryForm(BSModalModelForm):
+    class Meta:
+        model = Category
+        fields = ['title', 'parent_id']

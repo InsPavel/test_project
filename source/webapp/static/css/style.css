@@ -15,3 +15,7 @@
     max-width: 100%;
     max-height: 600px;
 }
+
+.nav-link {
+    cursor: pointer;
+}

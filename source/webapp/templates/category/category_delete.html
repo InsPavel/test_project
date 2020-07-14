@@ -1,0 +1,11 @@
+<div class="modal-body">
+    <h4 class="text-center">Данная категория будет удалена, вы действительно хотите её удалить? </h4>
+    <form class="text-center" action=""
+          method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+        <button type="submit" class="delete-btn btn btn-primary">Подтвердить</button>
+    </div>
+    </form>
+</div>

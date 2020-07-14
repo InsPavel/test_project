@@ -1,8 +1,8 @@
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from webapp.forms import ArticleCreateForm
+from webapp.forms import ArticleCreateForm, CategoryForm
 from webapp.models import Article, Category
-from bootstrap_modal_forms.generic import BSModalDeleteView
+from bootstrap_modal_forms.generic import BSModalDeleteView, BSModalCreateView, BSModalUpdateView
 
 
 class IndexView(ListView):
@@ -47,6 +47,37 @@ class ArticleDeleteView(BSModalDeleteView):
     success_message = 'Вы успешно удалили статью'
     success_url = reverse_lazy('webapp:index')
     context_object_name = 'article'
+
+
+class CategoriesListView(ListView):
+    model = Category
+    template_name = 'category/category_list.html'
+    context_object_name = 'categories'
+
+
+class CategoryCreateView(BSModalCreateView):
+    model = Category
+    form_class = CategoryForm
+    template_name = 'category/category_create.html'
+    success_url = reverse_lazy('webapp:categories')
+    success_message = 'Категория успешно добавлена'
+
+
+class CategoryUpdateView(BSModalUpdateView):
+    model = Category
+    form_class = CategoryForm
+    template_name = 'category/category_update.html'
+    success_url = reverse_lazy('webapp:categories')
+    success_message = 'Категория успешно обновлена'
+    context_object_name = 'category'
+
+
+class CategoryDeleteView(BSModalDeleteView):
+    model = Category
+    template_name = 'category/category_delete.html'
+    success_message = 'Вы успешно удалили категорию'
+    success_url = reverse_lazy('webapp:categories')
+    context_object_name = 'category'
 
 
 

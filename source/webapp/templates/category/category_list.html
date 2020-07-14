@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}Статьи{% endblock %}
+{% block menu_links %}
+        <li><p id="category-create" class="nav-link">Добавить категорию</p></li>
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <h1>Категории:</h1>
+        <dl>
+            {% for category in categories %}
+                <dt>Категория: {{ category.title }}</dt>
+                {% if category.parent_id %}
+                    <dd>Данная категория является подкатегорией  <b>"{{ category.parent_id.title }}"</b></dd>
+                {% endif %}
+                <dd>
+                    <button type="button" id="update-category" class="bs-modal btn btn-sm btn-primary"
+                            data-form-url="{% url 'webapp:category_update' category.pk %}"> Редактировать</button>
+                    <button type="button" id="delete-category" class="bs-modal btn btn-sm btn-danger"
+                            data-form-url="{% url 'webapp:category_delete' category.pk %}"> Удалить</button>
+                </dd>
+                <hr/>
+            {% endfor %}
+        </dl>
+    </div>
+{% endblock %}
+{% block scripts %}
+    <script>
+        $(document).ready(function() {
+            $(`#category-create`).modalForm({
+                formURL: "{% url 'webapp:category_create' %}"
+            });
+        });
+
+        $(".bs-modal").each(function () {
+          $(this).modalForm({
+              formURL: $(this).data('form-url')
+          });
+        });
+    </script>
+{% endblock %}
