@@ -1,7 +1,8 @@
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from webapp.forms import ArticleCreateForm
-from webapp.models import Article
+from webapp.models import Article, Category
+from bootstrap_modal_forms.generic import BSModalDeleteView
 
 
 class IndexView(ListView):
@@ -40,12 +41,12 @@ class ArticleUpdateView(UpdateView):
         return reverse('webapp:article_detail', kwargs={'pk': self.object.pk})
 
 
-class ArticleDeleteView(DeleteView):
+class ArticleDeleteView(BSModalDeleteView):
     model = Article
     template_name = 'article/article_delete.html'
+    success_message = 'Вы успешно удалили статью'
     success_url = reverse_lazy('webapp:index')
     context_object_name = 'article'
-
 
 
 
