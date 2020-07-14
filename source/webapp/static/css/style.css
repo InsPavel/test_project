@@ -10,3 +10,8 @@
     text-align: center;
     color: green;
 }
+
+.article-img {
+    max-width: 100%;
+    max-height: 600px;
+}

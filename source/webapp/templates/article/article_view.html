@@ -1,10 +1,14 @@
 {% extends 'base.html' %}
 {% block title %}Статья{% endblock %}
+{% block menu_links %}
+    <li><a href="{% url 'webapp:article_update' article.pk%}"  class="nav-link">Редактировать статью</a></li>
+    <li><p id="article-delete" class="nav-link">Удалить статью</p></li>
+{% endblock %}
 {% block content %}
     <div class="container">
         <div class="text-center">
             {% if article.image %}
-                <img src="{{ article.image.url }}" alt="{{ article.title }}">
+                <img src="{{ article.image.url }}" alt="{{ article.title }}" class="article-img">
             {% endif %}
         </div>
         {% for category in article.category_id.all %}
@@ -14,4 +18,13 @@
         <p>{{ article.description }}</p>
         <p>By: {{ article.user_id.username }}</p>
     </div>
+{% endblock %}
+{% block scripts %}
+    <script>
+        $(document).ready(function() {
+            $(`#article-delete`).modalForm({
+                formURL: "{% url 'webapp:article_delete' article.pk%}"
+            });
+        });
+    </script>
 {% endblock %}
