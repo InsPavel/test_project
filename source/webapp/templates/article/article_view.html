@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Статья{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="text-center">
+            {% if article.image %}
+                <img src="{{ article.image.url }}" alt="{{ article.title }}">
+            {% endif %}
+        </div>
+        {% for category in article.category_id.all %}
+            <p class="btn btn-link">{{ category }}</p>
+        {% endfor %}
+        <h1>{{ article.title }}</h1>
+        <p>{{ article.description }}</p>
+        <p>By: {{ article.user_id.username }}</p>
+    </div>
+{% endblock %}

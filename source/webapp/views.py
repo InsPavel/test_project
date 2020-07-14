@@ -43,7 +43,13 @@ class UserPasswordChangeView(BSModalUpdateView):
 class IndexView(ListView):
     template_name = 'article/index.html'
     model = Article
-    content_key = 'articles'
+    context_object_name = 'articles'
+
+
+class ArticleDetailView(DetailView):
+    template_name = 'article/article_view.html'
+    model = Article
+    context_object_name = 'article'
 
 
 
