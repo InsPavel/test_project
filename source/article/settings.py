@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bootstrap_modal_forms',
     'webapp',
+    'accounts',
     'behave_django'
 ]
 
@@ -126,6 +127,6 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/upload/'
 MEDIA_ROOT = 'upload'
 
-LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = 'index'
-LOGOUT_REDIRECT_URL = 'index'
+LOGIN_URL = 'accounts:login'
+LOGIN_REDIRECT_URL = 'webapp:index'
+LOGOUT_REDIRECT_URL = 'webapp:index'

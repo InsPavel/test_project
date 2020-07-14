@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-<form action="{% url 'login' %}" method="post" class="text-center">
+<form action="{% url 'accounts:login' %}" method="post" class="text-center">
     {% csrf_token %}
     <input type="hidden" name="next" value="{{ next }}">
     {% if form.non_field_errors %}

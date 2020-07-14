@@ -22,11 +22,11 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
             {% if request.user.is_authenticated %}
-                <li class="nav-item"><a href="{% url 'logout' %}" id="logout" class="nav-link">Выход</a></li>
-                <li class="nav-item"><a href="{% url 'detail' user.pk %}" id="detail-user" class="nav-link">{{ user.username }}</a></li>
+                <li class="nav-item"><a href="{% url 'accounts:logout' %}" id="logout" class="nav-link">Выход</a></li>
+                <li class="nav-item"><a href="{% url 'accounts:detail' user.pk %}" id="detail-user" class="nav-link">{{ user.username }}</a></li>
                 {% block menu_links %}{% endblock %}
             {% else %}
-                <li class="nav-item"><a href="{% url 'login' %}" id="login" class="nav-link">Вход</a></li>
+                <li class="nav-item"><a href="{% url 'accounts:login' %}" id="login" class="nav-link">Вход</a></li>
                 <li class="menu-right" ><p id="create-user" class="nav-link">Регистрация</p></li>
             {% endif %}
         </ul>
@@ -52,7 +52,7 @@
 <script>
 $(document).ready(function() {
     $("#create-user").modalForm({
-        formURL: "{% url 'create_user' %}"
+        formURL: "{% url 'accounts:create_user' %}"
     });
 });
 </script>

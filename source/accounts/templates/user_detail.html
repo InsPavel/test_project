@@ -14,7 +14,7 @@
     <script>
         $(document).ready(function() {
             $(`#user-change`).modalForm({
-                formURL: "{% url 'password_change' user_obj.pk%}"
+                formURL: "{% url 'accounts:password_change' user_obj.pk%}"
             });
         });
     </script>
