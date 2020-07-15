@@ -1,5 +1,7 @@
 from bootstrap_modal_forms.forms import BSModalModelForm
 from django import forms
+from django.core.exceptions import ObjectDoesNotExist
+
 from webapp.models import Article, Category
 
 
@@ -20,6 +22,13 @@ class ArticleCreateForm(forms.ModelForm):
 
 
 class CategoryForm(BSModalModelForm):
+    def clean_title(self):
+        title = self.cleaned_data.get('title')
+        category = Category.objects.filter(title=title)
+        if len(category) != 0:
+            raise forms.ValidationError('Данная категория уже существует!')
+        return title
+
     class Meta:
         model = Category
         fields = ['title', 'parent_id']
