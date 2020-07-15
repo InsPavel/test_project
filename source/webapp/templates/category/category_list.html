@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 {% block title %}Статьи{% endblock %}
 {% block menu_links %}
+    {% if request.user.is_staff %}
         <li><p id="category-create" class="nav-link">Добавить категорию</p></li>
+    {% endif %}
 {% endblock %}
 {% block content %}
     <div class="container">
@@ -12,12 +14,14 @@
                 {% if category.parent_id %}
                     <dd>Данная категория является подкатегорией  <b>"{{ category.parent_id.title }}"</b></dd>
                 {% endif %}
-                <dd>
-                    <button type="button" id="update-category" class="bs-modal btn btn-sm btn-primary"
-                            data-form-url="{% url 'webapp:category_update' category.pk %}"> Редактировать</button>
-                    <button type="button" id="delete-category" class="bs-modal btn btn-sm btn-danger"
-                            data-form-url="{% url 'webapp:category_delete' category.pk %}"> Удалить</button>
-                </dd>
+                {% if article.user_id == request.user or request.user.is_staff%}
+                    <dd>
+                        <button type="button" id="update-category" class="bs-modal btn btn-sm btn-primary"
+                                data-form-url="{% url 'webapp:category_update' category.pk %}"> Редактировать</button>
+                        <button type="button" id="delete-category" class="bs-modal btn btn-sm btn-danger"
+                                data-form-url="{% url 'webapp:category_delete' category.pk %}"> Удалить</button>
+                    </dd>
+                {% endif %}
                 <hr/>
             {% endfor %}
         </dl>
