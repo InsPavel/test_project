@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block title %}Статьи{% endblock %}
 {% block menu_links %}
-    <li><a href="{% url 'webapp:article_create' %}"  class="nav-link">Добавить статью</a></li>
+    <li><a href="{% url 'webapp:article_create' %}" id="article-create" class="nav-link">Добавить статью</a></li>
 {% endblock %}
 {% block content %}
     <div class="container">

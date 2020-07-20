@@ -2,7 +2,7 @@
 {% block title %}Статья{% endblock %}
 {% block menu_links %}
     {% if article.user_id == request.user or request.user.is_staff%}
-        <li><a href="{% url 'webapp:article_update' article.pk%}"  class="nav-link">Редактировать статью</a></li>
+        <li><a href="{% url 'webapp:article_update' article.pk%}" id="article-update"  class="nav-link">Редактировать статью</a></li>
         <li><p id="article-delete" class="nav-link">Удалить статью</p></li>
     {% endif %}
 {% endblock %}

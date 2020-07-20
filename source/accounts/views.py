@@ -11,12 +11,6 @@ class RegisterView(BSModalCreateView):
     success_message = 'Вы успешно зарегистрировались. Теперь вы можете авторизоваться.'
     success_url = reverse_lazy('accounts:login')
 
-    def post(self, request, *args, **kwargs):
-        form = self.form_class(data=request.POST, request=self.request)
-        if form.is_valid():
-            return self.form_valid(form)
-        return super().post(request, *args, **kwargs)
-
 
 class UserDetailView(DetailView):
     model = User
@@ -31,9 +25,3 @@ class UserPasswordChangeView(BSModalUpdateView):
     success_message = 'Вы успешно сменили пароль. Теперь вы можете авторизоваться.'
     success_url = reverse_lazy('accounts:login')
     context_object_name = 'user_obj'
-
-    def post(self, request, *args, **kwargs):
-        form = self.form_class(data=request.POST, request=self.request)
-        if form.is_valid():
-            return self.form_valid(form)
-        return super().post(request, *args, **kwargs)

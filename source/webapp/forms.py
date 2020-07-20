@@ -1,15 +1,11 @@
 from bootstrap_modal_forms.forms import BSModalModelForm
 from django import forms
-from django.core.exceptions import ObjectDoesNotExist
-
 from webapp.models import Article, Category
 
 
 class ArticleCreateForm(forms.ModelForm):
     def __init__(self, user=None, **kwargs):
         self.user = user
-        if user and not user.is_authenticated:
-            self.user = None
         super().__init__(**kwargs)
 
     def save(self, commit=True):

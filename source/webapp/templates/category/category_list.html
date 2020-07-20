@@ -16,9 +16,9 @@
                 {% endif %}
                 {% if article.user_id == request.user or request.user.is_staff%}
                     <dd>
-                        <button type="button" id="update-category" class="bs-modal btn btn-sm btn-primary"
+                        <button type="button" class="category-update bs-modal btn btn-sm btn-primary"
                                 data-form-url="{% url 'webapp:category_update' category.pk %}"> Редактировать</button>
-                        <button type="button" id="delete-category" class="bs-modal btn btn-sm btn-danger"
+                        <button type="button" class="category-delete bs-modal btn btn-sm btn-danger"
                                 data-form-url="{% url 'webapp:category_delete' category.pk %}"> Удалить</button>
                     </dd>
                 {% endif %}
