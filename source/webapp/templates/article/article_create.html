@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
-    <div class="container">
+    <div class="container text-center">
         <form action="{% url 'webapp:article_create' %}" method="post" enctype="multipart/form-data">
-            {% include 'partial/form.html' %}
-            <button type="submit" class="submit-btn btn btn-primary">Добавить статью</button>
+            {% include 'partial/form.html' with text_button='Добавить статью' %}
         </form>
     </div>
 {% endblock %}

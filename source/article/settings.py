@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bootstrap_modal_forms',
+    'ckeditor',
     'rest_framework',
     'webapp',
     'accounts',
@@ -124,6 +125,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = 'webapp/static/'
 
 MEDIA_URL = '/upload/'
 MEDIA_ROOT = 'upload'
@@ -131,3 +133,10 @@ MEDIA_ROOT = 'upload'
 LOGIN_URL = 'accounts:login'
 LOGIN_REDIRECT_URL = 'webapp:index'
 LOGOUT_REDIRECT_URL = 'webapp:index'
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+        'width': '100%'
+    },
+}

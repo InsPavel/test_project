@@ -10,6 +10,8 @@ class IndexView(LoginRequiredMixin, ListView):
     template_name = 'index.html'
     model = Article
     context_object_name = 'articles'
+    paginate_by = 10
+    paginate_orphans = 1
 
 
 class ArticleDetailView(LoginRequiredMixin, DetailView):
@@ -68,6 +70,8 @@ class CategoriesListView(LoginRequiredMixin, ListView):
     model = Category
     template_name = 'category/category_list.html'
     context_object_name = 'categories'
+    paginate_by = 10
+    paginate_orphans = 1
 
 
 class CategoryCreateView(PermissionRequiredMixin, BSModalCreateView):

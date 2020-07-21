@@ -1,21 +1,67 @@
 .help-block {
     color: red;
 }
-
 #create-user {
     cursor: pointer;
 }
-
 .messages {
     text-align: center;
     color: green;
 }
-
 .article-img {
     max-width: 100%;
     max-height: 600px;
 }
-
 .nav-link {
     cursor: pointer;
+}
+
+.label-form {
+    display: block;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#id_category_id{
+    width: 20%;
+}
+
+#id_title {
+    width: 100%;
+}
+
+.django-ckeditor-widget{
+    width: 100%;
+}
+
+.pagination {
+    width: 100%;
+}
+
+.step-links {
+    margin: 0 auto;
+}
+
+ 
+.pagination a, .pagination .page-disabled {
+   display: inline-block;
+   border: solid 1px #6a7ddd;
+   border-radius: 3px;
+   padding: 5px;
+   margin: 3px;
+}
+ 
+.pagination a {
+   background: #6a7ddd;
+   color: white;
+}
+ 
+.pagination a:hover {
+   background: #6a7dff;
+   text-decoration: underline;
+}
+ 
+.pagination .page-disabled {
+   background: #6a7dcc;
+   color: #dddddd
 }

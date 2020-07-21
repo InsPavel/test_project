@@ -1,10 +1,14 @@
+{% load static %}
 {% csrf_token %}
 {% for field in form %}
   <div class="form-group{% if field.errors %} invalid{% endif %}">
-    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+    <label for="{{ field.id_for_label }}" class="label-form">{{ field.label }}</label>
     {{ field }}
     {% for error in field.errors %}
       <p class="help-block {{ field.id_for_label }}">{{ error }}</p>
     {% endfor %}
   </div>
 {% endfor %}
+<button type="submit" class="submit-btn btn btn-primary">{{ text_button }}</button>
+<script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+<script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>

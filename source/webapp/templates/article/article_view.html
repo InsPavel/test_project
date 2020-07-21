@@ -8,17 +8,19 @@
 {% endblock %}
 {% block content %}
     <div class="container">
+    {% autoescape off %}
         <div class="text-center">
             {% if article.image %}
                 <img src="{{ article.image.url }}" alt="{{ article.title }}" class="article-img">
             {% endif %}
         </div>
         {% for category in article.category_id.all %}
-            <p class="btn btn-link">{{ category }}</p>
+            <p class="text-danger">{{ category }}</p>
         {% endfor %}
         <h1>{{ article.title }}</h1>
         <p>{{ article.description }}</p>
         <p>By: {{ article.user_id.username }}</p>
+    {% endautoescape %}
     </div>
 {% endblock %}
 {% block scripts %}
