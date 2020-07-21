@@ -56,7 +56,24 @@ $(document).ready(function() {
     $("#create-user").modalForm({
         formURL: "{% url 'accounts:create_user' %}"
     });
+
+    {#Запросы на эндпоинты #}
+    $.ajax({
+        url: '/api/articles/',
+        success: response => {
+            console.log(response)
+        }
+    });
+
+    $.ajax({
+        url: '/api/categories/',
+        success: response => {
+            console.log(response)
+        }
+    })
 });
+
+
 </script>
 {% block scripts %}{% endblock %}
 </body>
