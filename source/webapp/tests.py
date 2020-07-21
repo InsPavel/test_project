@@ -61,7 +61,7 @@ class RegistrationTest(TestCase):
 
 
 class UserDetailTest(TestCase):
-    fixtures = ['fixtures/dump.json']
+    fixtures = ['fixtures/test_dump.json']
 
     def setUp(self):
         self.client.login(username='admin', password='admin')
