@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator
 from django.test import TestCase
 from webapp.forms import CategoryForm
 from webapp.models import Article, Category
@@ -57,6 +58,36 @@ class RegistrationTest(TestCase):
         elif status == 'success':
             self.assertEqual(response.status_code, 302)
             self.assertEqual(response.url, redirect_url)
+
+
+class UserDetailTest(TestCase):
+    fixtures = ['fixtures/dump.json']
+
+    def setUp(self):
+        self.client.login(username='admin', password='admin')
+
+    def test_pagination_first_page(self):
+        response = self.client.get('/accounts/user/1/')
+        page = response.context['page_obj']
+        self.assertEqual("<Page 1 of 4>", str(page))
+        self.assertEqual(len(page.object_list), 10)
+
+    def test_pagination_last_page(self):
+        response = self.client.get('/accounts/user/1/?page=4')
+        page = response.context['page_obj']
+        self.assertFalse(page.has_next())
+        self.assertTrue(page.has_previous())
+        self.assertTrue(page.has_other_pages())
+
+    def test_page_not_an_integer(self):
+        response = self.client.get('/accounts/user/1/?page=None')
+        page = response.context['page_obj']
+        self.assertEqual("<Page 1 of 4>", str(page))
+
+    def test_page_empty(self):
+        response = self.client.get('/accounts/user/1/?page=44')
+        page = response.context['page_obj']
+        self.assertEqual("<Page 4 of 4>", str(page))
 
 
 class UserChangePasswordTest(TestCase):
@@ -130,16 +161,17 @@ class UserPermissionTest(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_user_has_perm_update_admin(self):
-        self.client.login(username='admin', password='admin2')
+        self.client.login(username='admin', password='admin')
         response = self.client.get('/article/update/2/')
         self.assertEqual(response.status_code, 200)
 
     def test_user_has_perm_delete(self):
+        self.client.login(username='admin', password='admin')
         response = self.client.get('/article/delete/2/')
         self.assertEqual(response.status_code, 200)
 
     def test_user_has_perm_delete_admin(self):
-        self.client.login(username='admin', password='admin2')
+        self.client.login(username='admin', password='admin')
         response = self.client.get('/article/delete/2/')
         self.assertEqual(response.status_code, 200)
 
