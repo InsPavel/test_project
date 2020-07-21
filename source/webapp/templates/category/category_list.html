@@ -7,30 +7,29 @@
 {% endblock %}
 {% block content %}
     <div class="container">
-        <h1>Категории:</h1>
-        {% if is_paginated %}
-            {% include 'partial/pagination.html' %}
-        {% endif %}
-        <dl>
-            {% for category in categories %}
-                <dt>Категория: {{ category.title }}</dt>
-                {% if category.parent_id %}
-                    <dd>Данная категория является подкатегорией  <b>"{{ category.parent_id.title }}"</b></dd>
-                {% endif %}
-                {% if article.user_id == request.user or request.user.is_staff%}
-                    <dd>
-                        <button type="button" class="category-update bs-modal btn btn-sm btn-primary"
-                                data-form-url="{% url 'webapp:category_update' category.pk %}"> Редактировать</button>
-                        <button type="button" class="category-delete bs-modal btn btn-sm btn-danger"
-                                data-form-url="{% url 'webapp:category_delete' category.pk %}"> Удалить</button>
-                    </dd>
-                {% endif %}
-                <hr/>
-            {% endfor %}
-        </dl>
-        {% if is_paginated %}
-            {% include 'partial/pagination.html' %}
-        {% endif %}
+        <div class="infinite-container">
+            <h1>Категории:</h1>
+            <dl>
+                {% for category in categories %}
+                    <div class="infinite-item">
+                        <dt>Категория: {{ category.title }}</dt>
+                        {% if category.parent_id %}
+                            <dd>Данная категория является подкатегорией  <b>"{{ category.parent_id.title }}"</b></dd>
+                        {% endif %}
+                        {% if article.user_id == request.user or request.user.is_staff%}
+                            <dd>
+                                <button type="button" class="category-update bs-modal btn btn-sm btn-primary"
+                                        data-form-url="{% url 'webapp:category_update' category.pk %}"> Редактировать</button>
+                                <button type="button" class="category-delete bs-modal btn btn-sm btn-danger"
+                                        data-form-url="{% url 'webapp:category_delete' category.pk %}"> Удалить</button>
+                            </dd>
+                        {% endif %}
+                        <hr/>
+                    </div>
+                {% endfor %}
+            </dl>
+        </div>
+        {% include 'partial/pagination.html' %}
     </div>
 {% endblock %}
 {% block scripts %}
