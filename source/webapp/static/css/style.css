@@ -1,6 +1,50 @@
 .help-block {
     color: red;
 }
+
+.login-container {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: auto;
+    text-align: center;
+}
+
+.login{
+    width: 250px;
+    height: 250px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -125px 0 0 -125px;
+}
+
+.password-eye {
+    margin-left: -30px;
+    cursor: pointer;
+}
+
+.form-control{
+    padding-right: 35px;
+}
+
+.my-modal-dialog {
+    width: 300px;
+}
+
+.my-modal-body{
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.change-password-eye {
+    float: right;
+    margin-top: -28px;
+    margin-right: 5px;
+}
+
 #create-user {
     cursor: pointer;
 }
@@ -14,6 +58,45 @@
 }
 .nav-link {
     cursor: pointer;
+}
+
+.dropleft {
+    display: inline-block;
+}
+
+.fas{
+    font-size: 25px;
+    color: white;
+}
+
+.fa-trash-alt {
+    color: red;
+}
+
+.fa-edit {
+    color: blue;
+    margin-right: 10px;
+}
+
+.fas:hover{
+    color: aqua;
+}
+
+.password-change {
+    color: white;
+    font-size: 18px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.add-category {
+    color: white;
+    cursor: pointer;
+}
+
+.password-change:hover,
+.add-category:hover {
+    color: aqua;
 }
 
 .label-form {

@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bootstrap_modal_forms',
     'ckeditor',
+    'widget_tweaks',
     'rest_framework',
     'webapp',
     'accounts',

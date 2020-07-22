@@ -8,46 +8,47 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{% block title %}{% endblock %}</title>
 
+    <link rel="stylesheet" href="{% static 'css/all.css' %}">
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     {% block styles %}{% endblock %}
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
+<nav class="navbar navbar-expand-lg navbar-light bg-dark sticky-top">
+    <div class="container">
+        <div class="navbar-collapse" id="navbarNav">
+        <a href="{% url 'webapp:index' %}" class="nav-link nav-item d-inline-block"><i class="fas fa-home"></i></a>
             {% if request.user.is_authenticated %}
-                <li class="nav-item"><a href="{% url 'webapp:index' %}" class="nav-link">На главную</a></li>
-                <li class="nav-item"><a href="{% url 'webapp:categories' %}" class="nav-link">Список категорий</a></li>
-                {% block menu_links %}{% endblock %}
-                <li class="nav-item"><a href="{% url 'accounts:logout' %}" id="logout" class="nav-link">Выход</a></li>
-                <li class="nav-item"><a href="{% url 'accounts:detail' user.pk %}" id="detail-user" class="nav-link">{{ user.username }}</a></li>
+                <div class="ml-auto float-right d-inline-block">
+                    {% block menu_links %}{% endblock %}
+                    <div class="dropleft">
+                        <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-user"></i>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="{% url 'accounts:logout' %}" id="logout">Выход</a>
+                            <a class="dropdown-item" href="{% url 'accounts:detail' user.pk %}" id="detail-user">Личный кабинет</a>
+                        </div>
+                    </div>
+                </div>
             {% else %}
+            <ul class="navbar-nav ml-auto">
                 <li class="nav-item"><a href="{% url 'accounts:login' %}" id="login" class="nav-link">Вход</a></li>
                 <li class="menu-right" ><p id="create-user" class="nav-link">Регистрация</p></li>
+            </ul>
             {% endif %}
-        </ul>
+    </div>
     </div>
 </nav>
-    {% if messages %}
-        <div class="messages">
-            {% for message in messages %}
-                <p {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </p>
-            {% endfor %}
-        </div>
+{% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+            <p {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </p>
+        {% endfor %}
+    </div>
 {% endif %}
 {% block content %}
 {% endblock %}
-<div class="modal fade" tabindex="-1" role="dialog" id="modal">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content"></div>
-  </div>
-</div>
 <script src="{% static 'js/jquery-3.5.1.js' %}"></script>
 <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
 <script src="{% static 'js/infinite.min.js' %}"></script>
@@ -59,10 +60,6 @@
 <script>window.CKEDITOR_BASEPATH = '/static/ckeditor/ckeditor/';</script>
 <script>
 $(document).ready(function() {
-    $("#create-user").modalForm({
-        formURL: "{% url 'accounts:create_user' %}"
-    });
-
     {#Запросы на эндпоинты #}
     $.ajax({
         url: '/api/articles/',

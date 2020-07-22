@@ -2,12 +2,12 @@
 {% block title %}Статья{% endblock %}
 {% block menu_links %}
     {% if article.user_id == request.user or request.user.is_staff%}
-        <li><a href="{% url 'webapp:article_update' article.pk%}" id="article-update"  class="nav-link">Редактировать статью</a></li>
-        <li><p id="article-delete" class="nav-link">Удалить статью</p></li>
+        <a href="{% url 'webapp:article_update' article.pk%}" id="article-update"  class="nav-item"><i class="fas fa-edit"></i></a>
+        <p id="article-delete" class="d-inline-block"><i class="fas fa-trash-alt"></i></p>
     {% endif %}
 {% endblock %}
 {% block content %}
-    <div class="container">
+    <div class="container mt-5">
     {% autoescape off %}
         <div class="text-center">
             {% if article.image %}

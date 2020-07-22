@@ -1,15 +1,14 @@
 {% extends 'base.html' %}
 {% block title %}Пользователь{% endblock %}
 {% block menu_links %}
-    <li><p id="user-change" class="nav-link">Сменить пароль</p></li>
+    <p id="user-change" class="password-change">Сменить пароль</p>
 {% endblock %}
 {% block content %}
-    <div class="container">
+    <div class="container mt-5">
         <h1 class="text-center">Личный кабинет</h1>
         <p>Имя пользователя: {{ user_obj.username }}</p>
         <h3>Статьи добавленные пользователем</h3>
         <div class="infinite-container">
-            <h1>Статьи:</h1>
             {% for article in page_obj %}
                 <div class="infinite-item">
                     <a href="{% url 'webapp:article_detail' article.pk %}">{{ article.title }}</a>
@@ -28,4 +27,6 @@
             });
         });
     </script>
+
+
 {% endblock %}

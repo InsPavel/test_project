@@ -1,7 +1,15 @@
 {% extends 'base.html' %}
 {% block title %}Статьи{% endblock %}
 {% block menu_links %}
-    <li><a href="{% url 'webapp:article_create' %}" id="article-create" class="nav-link">Добавить статью</a></li>
+    <div class="dropleft">
+        <a class="nav-link" href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-stream"></i>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a href="{% url 'webapp:article_create' %}" id="article-create" class="dropdown-item">Добавить статью</a>
+            <a href="{% url 'webapp:categories' %}" class="dropdown-item">Список категорий</a>
+        </div>
+    </div>
 {% endblock %}
 {% block content %}
     <div class="container mt-5">

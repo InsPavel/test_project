@@ -2,7 +2,7 @@
 {% block title %}Статьи{% endblock %}
 {% block menu_links %}
     {% if request.user.is_staff %}
-        <li><p id="category-create" class="nav-link">Добавить категорию</p></li>
+        <p id="category-create" class="d-inline-block add-category">Добавить категорию</p>
     {% endif %}
 {% endblock %}
 {% block content %}
@@ -30,6 +30,11 @@
             </dl>
         </div>
         {% include 'partial/pagination.html' %}
+    </div>
+    <div class="modal fade" tabindex="-1" role="dialog" id="modal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content"></div>
+      </div>
     </div>
 {% endblock %}
 {% block scripts %}
