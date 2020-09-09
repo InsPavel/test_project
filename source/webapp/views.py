@@ -92,6 +92,11 @@ class CategoryUpdateView(PermissionRequiredMixin, BSModalUpdateView):
     context_object_name = 'category'
     permission_required = 'webapp.change_category'
 
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['old_category'] = self.object.title
+        return kwargs
+
 
 class CategoryDeleteView(PermissionRequiredMixin, BSModalDeleteView):
     model = Category

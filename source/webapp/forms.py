@@ -18,10 +18,14 @@ class ArticleCreateForm(forms.ModelForm):
 
 
 class CategoryForm(BSModalModelForm):
+    def __init__(self, old_category=None, **kwargs):
+        self.old_category = old_category
+        super().__init__(**kwargs)
+
     def clean_title(self):
         title = self.cleaned_data.get('title')
         category = Category.objects.filter(title=title)
-        if len(category) != 0:
+        if len(category) != 0 and self.old_category != title:
             raise forms.ValidationError('Данная категория уже существует!')
         return title
 

@@ -2,7 +2,7 @@
 {% block content %}
     <div class="container text-center">
         <form action="{% url 'webapp:article_update' article_obj.pk %}" method="post" enctype="multipart/form-data">
-            {% include 'partial/form.html' with text_button='Редактировать статью'%}
+            {% include 'partial/form.html' with submit='Редактировать статью'%}
         </form>
     </div>
 {% endblock %}

@@ -157,7 +157,7 @@ class UserPermissionTest(TestCase):
         self.assertEqual(response.status_code, 403)
 
     def test_user_has_perm_update(self):
-        response = self.client.get('/article/update/2/')
+        response = self.client.get('/article/update/5/')
         self.assertEqual(response.status_code, 200)
 
     def test_user_has_perm_update_admin(self):
@@ -166,8 +166,7 @@ class UserPermissionTest(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_user_has_perm_delete(self):
-        self.client.login(username='admin', password='admin')
-        response = self.client.get('/article/delete/2/')
+        response = self.client.get('/article/delete/5/')
         self.assertEqual(response.status_code, 200)
 
     def test_user_has_perm_delete_admin(self):
@@ -212,18 +211,18 @@ class ArticleCRUDTest(TestCase):
     def add_article(self):
         response = self.client.post('/article/create/', data=self.data)
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(response.url, '/article/3/')
+        self.assertEqual(response.url, '/article/41/')
 
     def update_article(self):
         self.data['category_id'] = 1
         self.data['title'] = 'Test Article Update'
         self.data['description'] = 'Test Article Description Update'
-        self.client.post('/article/update/3/', data=self.data)
+        self.client.post('/article/update/41/', data=self.data)
         article = Article.objects.filter(title=self.data['title'], category_id=self.data['category_id'])
         self.assertEqual(len(article), 1)
 
     def delete_article(self):
-        self.check_method('/article/delete/3/', 'DEL')
+        self.check_method('/article/delete/41/', 'DEL')
 
     def add_article_error(self):
         self.data['title'] = ''
@@ -249,7 +248,7 @@ class CategoryCRUDTest(TestCase):
         self.client.login(username='admin', password='admin')
         self.data = {
             'title': 'Test',
-            'parent_id': 1
+            'parent_id': 1,
         }
         self.validation_message = 'Данная категория уже существует!'
 
@@ -264,7 +263,7 @@ class CategoryCRUDTest(TestCase):
 
     def test_category_title_validation(self):
         self.add_category()
-        form = CategoryForm(self.data)
+        form = CategoryForm(data=self.data, old_category=None)
         self.assertFalse(form.is_valid())
         self.assertEqual(form.errors['title'][0], self.validation_message)
 

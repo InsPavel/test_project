@@ -1,10 +1,6 @@
 <div class="modal-body">
     <h4 class="text-center">Добавить категорию </h4>
    <form action="{% url 'webapp:category_create' %}" method="post">
-        {% include 'partial/category_form.html' %}
-       <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
-            <button type="button" class="submit-btn btn btn-primary">Добавить</button>
-        </div>
+        {% include 'partial/category_form.html' with submit='Добавить' %}
     </form>
 </div>

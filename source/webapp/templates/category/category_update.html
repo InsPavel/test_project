@@ -1,10 +1,6 @@
 <div class="modal-body">
     <h4 class="text-center">Редактировать категорию </h4>
    <form action="" method="post">
-        {% include 'partial/form.html' %}
-       <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
-            <button type="button" class="submit-btn btn btn-primary">Редактировать</button>
-        </div>
+        {% include 'partial/category_form.html' with submit='Редактировать'%}
     </form>
 </div>

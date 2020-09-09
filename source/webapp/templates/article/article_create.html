@@ -3,7 +3,7 @@
 {% block content %}
     <div class="container text-center">
         <form action="{% url 'webapp:article_create' %}" method="post" enctype="multipart/form-data">
-            {% include 'partial/form.html' with text_button='Добавить статью' %}
+            {% include 'partial/form.html' with submit='Добавить статью'%}
         </form>
     </div>
 {% endblock %}
