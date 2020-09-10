@@ -38,12 +38,20 @@
             $(`#category-create`).modalForm({
                 formURL: "{% url 'webapp:category_create' %}"
             });
+
+            $(".bs-modal").each(function () {
+                $(this).modalForm({
+                  formURL: $(this).data('form-url')
+                });
+            });
         });
 
-        $(".bs-modal").each(function () {
-          $(this).modalForm({
-              formURL: $(this).data('form-url')
-          });
+        $(document).on('DOMNodeInserted', function(e) {
+            $(".bs-modal").each(function () {
+                $(this).modalForm({
+                  formURL: $(this).data('form-url')
+                });
+            });
         });
     </script>
 {% endblock %}

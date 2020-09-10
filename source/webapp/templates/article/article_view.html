@@ -30,5 +30,11 @@
                 formURL: "{% url 'webapp:article_delete' article.pk%}"
             });
         });
+
+        $(document).on('DOMNodeInserted', function(e) {
+            $(`#article-delete`).modalForm({
+                formURL: "{% url 'webapp:article_delete' article.pk%}"
+            });
+        });
     </script>
 {% endblock %}

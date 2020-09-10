@@ -17,10 +17,11 @@ class ArticleCreateForm(forms.ModelForm):
         fields = ['category_id', 'title', 'description', 'image']
 
 
-class CategoryForm(BSModalModelForm):
+class CategoryForm(BSModalModelForm, forms.Form):
     def __init__(self, old_category=None, **kwargs):
         self.old_category = old_category
         super().__init__(**kwargs)
+        self.fields['parent_id'].queryset = Category.objects.exclude(title=self.old_category)
 
     def clean_title(self):
         title = self.cleaned_data.get('title')

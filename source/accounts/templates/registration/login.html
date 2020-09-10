@@ -58,14 +58,20 @@
         $("#create-user").modalForm({
             formURL: "{% url 'accounts:create_user' %}"
         });
-    });
 
-    const togglePassword = document.querySelector('#togglePassword');
-    const password = document.querySelector('#id_password');
-    togglePassword.addEventListener('click', function (e) {
-    const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-    password.setAttribute('type', type);
-    this.classList.toggle('fa-eye');
-});
+        function showPassword(event) {
+            const id = $(`#${event.data.idInput}`);
+            const eye = $(`#${event.data.idIcon}`);
+            id.attr('type', id.is(':password') ? 'text' : 'password');
+            if (id.attr('type') === 'password') {
+                eye.removeClass('fa-eye').addClass('fa-eye-slash');
+            } else {
+                eye.removeClass('fa-eye-slash').addClass('fa-eye');
+            }
+        }
+        $("#togglePassword").on('click', {
+            idInput: 'id_password',
+            idIcon: 'togglePassword'}, showPassword);
+    });
 </script>
 </html>
