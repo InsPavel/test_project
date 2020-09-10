@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Список пользователей{% endblock %}
+{% block menu_links %}
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="infinite-container">
+            <h1>Список пользователей:</h1>
+            <dl>
+                {% for user in users %}
+                    <div class="infinite-item">
+                        <dt>{{ user.username }}</dt>
+                        {% if request.user.is_staff%}
+                            <dd>
+                                <button type="button" class="user-delete bs-modal btn btn-sm btn-danger"
+                                        data-form-url="{% url 'accounts:user_delete' user.pk %}"> Удалить</button>
+                            </dd>
+                        {% endif %}
+                        <hr/>
+                    </div>
+                {% endfor %}
+            </dl>
+        </div>
+        {% include 'partial/pagination.html' %}
+    </div>
+{% endblock %}
+{% block scripts %}
+    <script>
+        $(".bs-modal").each(function () {
+          $(this).modalForm({
+              formURL: $(this).data('form-url')
+          });
+        });
+    </script>
+{% endblock %}

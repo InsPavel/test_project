@@ -135,6 +135,20 @@ class UserChangePasswordTest(TestCase):
         self.assertEqual(response.url, redirect_url)
 
 
+class UserListTest(TestCase):
+    fixtures = ['fixtures/test_dump.json']
+
+    def test_user_list(self):
+        self.client.login(username='admin', password='admin')
+        response = self.client.get('/accounts/user/list/')
+        self.assertEqual(response.status_code, 200)
+
+    def test_user_list_error(self):
+        self.client.login(username='test_user', password='test_user')
+        response = self.client.get('/accounts/user/list/')
+        self.assertEqual(response.status_code, 403)
+
+
 class UserPermissionTest(TestCase):
     fixtures = ['fixtures/test_dump.json']
 
